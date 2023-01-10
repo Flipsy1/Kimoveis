@@ -3,8 +3,7 @@ import { Categories } from "../../entities/categories.entity";
 
 const getAllPropertiesCategoryService = async (id: string) => {
   const categoriesRepository = AppDataSource.getRepository(Categories);
-  console.log(id);
-  //entender pq não funcionou
+
   const properties = await categoriesRepository.findOne({
     where: {
       id: id,

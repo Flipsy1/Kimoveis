@@ -16,7 +16,6 @@ const uuidCategorieValidMiddleware = async (
       id: id,
     });
 
-    console.log(category);
     if (!category) {
       return res.status(404).json({ message: "Invalid Categorie id" });
     }

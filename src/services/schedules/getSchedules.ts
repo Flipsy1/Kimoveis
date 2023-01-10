@@ -13,30 +13,26 @@ const getSchedulesService = async (id: string) => {
     throw new AppError("Property not found", 404);
   }
 
-  //   const schedules = await propertieRepository
-  //     .createQueryBuilder("properties")
-  //     .innerJoinAndSelect("properties.schedules", "schedules")
-  //     .innerJoinAndSelect("schedules_users_properties.property", "property")
-  //     .where("properties.id = :id_propertie", { id_propertie: id })
-  //     .select([
-  //       "propertie",
-  //       "properties.schedules",
-  //       "properties.address",
-  //       "properties.category",
-  //       "schedules_users_properties",
-  //     ])
-  //     .getRawOne();
+  const schedules = await propertieRepository
+    .createQueryBuilder("properties")
+    .innerJoinAndSelect("properties.schedules", "schedules")
+    .innerJoinAndSelect("schedules.user", "user")
+    .innerJoinAndSelect("properties.address", "address")
+    .innerJoinAndSelect("properties.category", "category")
+    .where("properties.id = :id_propertie", { id_propertie: id })
+    //.select(["schedules.userId"])
+    .getOne();
 
-  const schedules = await propertieRepository.findOne({
-    where: {
-      id: id,
-    },
-    relations: {
-      schedules: true,
-      address: true,
-      category: true,
-    },
-  });
+  // const schedules = await propertieRepository.findOne({
+  //   where: {
+  //     id: id,
+  //   },
+  //   relations: {
+  //     schedules: true,
+  //     address: true,
+  //     category: true,
+  //   },
+  // });
 
   return schedules;
 };

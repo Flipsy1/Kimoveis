@@ -51,8 +51,6 @@ const createSchedulesService = async (data: IScheduleData) => {
     })
     .getOne();
 
-  console.log(propertieSchedule, userSchedule);
-
   const dataDay = data.date;
   const day = dataDay.replace("/", ",").replace("/", ",");
   const tranformDay = new Date(day).getDay();
